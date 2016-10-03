@@ -156,6 +156,32 @@ class MetricMAP implements IRankingMetric<Integer> {
     }
 }
 
+class MetricMAP10 implements IRankingMetric<Integer> {
+    private double m_sumAP;
+    private double m_map;
+    public String getName () { return "MAP10";}
+
+    public void init(Recommender rec) {
+        m_sumAP = 0.0;
+        m_map = -1;
+    }
+
+    public void updateWithList(List<Integer> results, List<Integer> test, int numDropped) {
+        double ap = Measures.APAt(results, test, 10);
+        m_sumAP += ap;
+    }
+
+    public void compute(int count) {
+        m_map = m_sumAP / count;
+    }
+
+    public double getValue() { return m_map;}
+    public String getValueAsString () {
+        return MetricCollection.ValueFormatString.format(this.getName(), this.getValue());
+    }
+}
+
+
 
 class MetricMRR implements IRankingMetric<Integer> {
     private double m_sumRR;

@@ -23,7 +23,7 @@ public class MetricCollection {
                     /* prediction-based measures */
             {"MetricMAE", "MetricRMSE", "MetricNMAE", "MetricRMAE", "MetricRRMSE", "MetricMPE", "Perplexity",
                     /* ranking-based measures */
-                    "MetricPre5", "MetricPre10", "MetricRec5", "MetricRec10", "MetricMAP", "MetricMRR", "MetricNDCG", "MetricAUC",
+                    "MetricPre5", "MetricPre10", "MetricRec5", "MetricRec10", "MetricMAP", "MetricMAP10", "MetricMRR", "MetricNDCG", "MetricAUC",
                     /* execution time */
                     "TrainTime", "TestTime"};
 

@@ -61,6 +61,47 @@ public class Measures {
 	}
 
 	/**
+         * Compute the average precision at K (AP@K) of a list of ranked items
+         * 
+         * @param <T>
+         * 
+         * @param rankedList
+         *            a list of ranked item IDs, the highest-ranking item first
+         * @param groudTruth
+         *            a collection of positive/correct item IDs
+	 * @param k
+			cutoff
+         * @return the AP for the given list
+         */
+
+	public static <T> double APAt(List<T> rankedList, List<T> groundTruth, int k) {
+                int hits = 0;
+                double sum_precs = 0;
+
+                if (groundTruth.size() <= 0)
+                        System.out.println("Empty groundTruth");
+
+                if (rankedList.size()>k) {
+                        rankedList = rankedList.subList(0, k);
+                }
+
+                for (int n = 0, m = rankedList.size(); n < m; n++) {
+                        T item = rankedList.get(n);
+
+                        if (groundTruth.contains(item)) {
+                                hits++;
+                                sum_precs += hits / (n + 1.0); // prec@n
+                        }
+                }
+
+                if (hits > 0)
+                        return sum_precs / Math.min(groundTruth.size(), k);
+                else
+                        return 0.0;
+        }
+
+
+	/**
 	 * Compute the precision at N of a list of ranked items at several N
 	 * 
 	 * @param <T>
